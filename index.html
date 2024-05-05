@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width">
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+		}
+
+		#header {
+			background-color: #333;
+			color: white;
+			padding: 10px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+
+		#profile-image {
+			border-radius: 50%;
+			width: 50px;
+			height: 50px;
+		}
+
+		#profile-info {
+			display: flex;
+			align-items: center;
+		}
+
+		#name-status {
+			margin-left: 10px;
+		}
+
+		#name {
+			margin-bottom: 5px;
+		}
+
+		#status {
+			font-size: 12px;
+			color: #00FF00;
+		}
+
+		#chat-container {
+			padding: 20px;
+			border: 1px solid #ccc;
+			min-height: 300px;
+		}
+
+		.user-message {
+			text-align: right;
+			margin: 10px 0;
+			background-color: #007BFF;
+			color: white;
+			padding: 10px;
+			border-radius: 10px;
+		}
+
+		.pellinuz-message {
+			text-align: left;
+			margin: 10px 0;
+			background-color: #E0E0E0;
+			padding: 10px;
+			border-radius: 10px;
+		}
+
+		#input-box {
+			padding: 10px;
+			border: 1px solid #ccc;
+			width: 100%;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="header">
+		<div id="profile-info">
+			<img id="profile-image" src="https://media.discordapp.net/stickers/970471943792885760.png"
+				alt="Profile Image">
+			<div id="name-status">
+				<div id="name">Pellinuz</div>
+				<div id="status">Online</div>
+			</div>
+		</div>
+	</div>
+	<div id="chat-container">
+	</div>
+	<input type="text" id="input-box" placeholder="Type your message..." onkeyup="sendMessage(event)">
+
+	<script>
+		function sendMessage(event) {
+			if (event.key === "Enter") {
+				const inputBox = document.getElementById("input-box");
+				const message = inputBox.value.trim();
+				if (message) {
+					const chatContainer = document.getElementById("chat-container");
+
+					// Update the status to "Typing..."
+					const statusElement = document.getElementById("status");
+					statusElement.innerText = "Typing...";
+
+					setTimeout(function () {
+						if (message.includes("how are you?")) {
+							const userMessageElement = document.createElement("div");
+							userMessageElement.className = "user-message";
+							userMessageElement.innerHTML = message;
+
+							const pellinuzMessageElement = document.createElement("div");
+							pellinuzMessageElement.className = "pellinuz-message";
+							pellinuzMessageElement.innerHTML = "I'm fine, how about you?";
+
+							chatContainer.appendChild(userMessageElement);
+
+							setTimeout(function () {
+								chatContainer.appendChild(pellinuzMessageElement);
+								// Reset the status to "Online"
+								statusElement.innerText = "Online";
+							}, 3000);
+						} else if (message.includes("hi")) {
+							const userMessageElement = document.createElement("div");
+							userMessageElement.className = "user-message";
+							userMessageElement.innerHTML = message;
+
+							const pellinuzMessageElement = document.createElement("div");
+							pellinuzMessageElement.className = "pellinuz-message";
+							pellinuzMessageElement.innerHTML = "Hello :D";
+
+							chatContainer.appendChild(userMessageElement);
+
+							setTimeout(function () {
+								chatContainer.appendChild(pellinuzMessageElement);
+								// Reset the status to "Online"
+								statusElement.innerText = "Online";
+							}, 1000);
+						} else {
+							const userMessageElement = document.createElement("div");
+							userMessageElement.className = "user-message";
+							userMessageElement.innerHTML = message;
+
+							chatContainer.appendChild(userMessageElement);
+							// Reset the status to "Online"
+							statusElement.innerText = "Online";
+						}
+					});
+					inputBox.value = "";
+				}
+			}
+		}
+	</script>
+</body>
+
+</html>
